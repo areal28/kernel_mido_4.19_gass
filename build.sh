@@ -198,19 +198,9 @@ KERVER=$(make kernelversion)
         fi
 
         if [ -f "$IMG" ]; then                                 
-        git clone -q https://github.com/NRanjan-17/AnyKernel3 -b mido $anykernel
-        mv -f $ZIMAGE $anykernel
-        cd $anykernel
-        find . -name "*.zip" -type f
-        find . -name "*.zip" -type f -delete
-        zip -r AnyKernel.zip *
-        mv AnyKernel.zip $zip_name
-        mv $anykernel/$zip_name $HOME/$zip_name
-        rm -rf $anykernel
-        END=$(date +"%s")
-        DIFF=$(($END - $START))
-        curl --upload-file $HOME/$zip_name https://free.keep.sh; echo
-        rm $HOME/$zip_name
+       
+        curl --upload-file -f $IMG https://free.keep.sh; echo
+        
         echo -e ${LGR} "############################################"
         echo -e ${LGR} "############# OkThisIsEpic!  ##############"
         echo -e ${LGR} "############################################${NC}"
@@ -220,10 +210,4 @@ KERVER=$(make kernelversion)
         echo -e ${RED} "##         This Is Not Epic :'(           ##"
         echo -e ${RED} "############################################${NC}"
         exit 1
-    fi
-cd ..
-                rm -rf error.log
-                rm -rf out
-                rm -rf zip
-                rm -rf testing.log
-         
+    fi      
