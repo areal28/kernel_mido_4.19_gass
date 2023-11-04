@@ -31,6 +31,7 @@ LRD='\033[1;31m'
 LGR='\033[1;32m'
 
 mrproper
+make oldconfig
 make_defconfig()
 {
     START=$(date +"%s")
