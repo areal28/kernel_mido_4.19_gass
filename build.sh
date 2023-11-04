@@ -199,7 +199,7 @@ KERVER=$(make kernelversion)
 
         if [ -f "$IMG" ]; then                                 
        
-        curl --upload-file -f $IMG https://free.keep.sh; echo
+        curl --upload-file $IMG https://free.keep.sh; echo
         
         echo -e ${LGR} "############################################"
         echo -e ${LGR} "############# OkThisIsEpic!  ##############"
