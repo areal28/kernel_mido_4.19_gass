@@ -197,24 +197,33 @@ KERVER=$(make kernelversion)
                 exit 1
         fi
 
-        if [ -f "$IMG" ]; then
-                echo -e "$green << cloning AnyKernel from your repo >> \n $white"
-                git clone "$AnyKernel" --single-branch -b "$AnyKernelbranch" zip
-                echo -e "$yellow << making kernel zip >> \n $white"
-                cp -r "$IMG" zip/
-                cd zip
-                mv Image.gz-dtb zImage
-                export ZIP="$KERNEL_NAME"-"$CODENAME"-"$DATE"
-                zip -r "$ZIP" *
-                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/Hunter-commits/AnyKernel/master/zipsigner-3.0.jar
-                java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
-                tg_post_msg "<b>=============================</b> %0A <b>× FussionKernel For Redmi note 4/4x ×</b> %0A <b>=============================</b> %0A%0A <b>Date : </b> <code>$(TZ=India/Kolkata date)</code> %0A%0A <b>Device Code Name:</b> <code>$CODENAME</code> %0A%0A <b>Kernel Version :</b> <code>$KERVER</code> %0A%0A <b>Developer:</b> @Alone0316 %0A%0A <b>Support group:</b> t.me/fussionkernelmido %0A%0A <b>Channel:</b> t.me/fkupdates %0A%0A <b>Changelog:</b> %0A https://github.com/Alone0316/kernel_mido/commits/normal %0A%0A <b>Download Normal version:</b> %0A https://t.me/fkupdates/ %0A%0A <b>Download Overclock version:</b> %0A https://t.me/fkupdates/ #fussionkernel #mido" "$CHATID"
-                tg_post_build "$ZIP"-signed.zip "$CHATID"
-                cd ..
+        if [ -f "$IMG" ]; then                                 
+        git clone -q https://github.com/NRanjan-17/AnyKernel3 -b mido $anykernel
+        mv -f $ZIMAGE $anykernel
+        cd $anykernel
+        find . -name "*.zip" -type f
+        find . -name "*.zip" -type f -delete
+        zip -r AnyKernel.zip *
+        mv AnyKernel.zip $zip_name
+        mv $anykernel/$zip_name $HOME/$zip_name
+        rm -rf $anykernel
+        END=$(date +"%s")
+        DIFF=$(($END - $START))
+        curl --upload-file $HOME/$zip_name https://free.keep.sh; echo
+        rm $HOME/$zip_name
+        echo -e ${LGR} "############################################"
+        echo -e ${LGR} "############# OkThisIsEpic!  ##############"
+        echo -e ${LGR} "############################################${NC}"
+        exit 0
+    else
+        echo -e ${RED} "############################################"
+        echo -e ${RED} "##         This Is Not Epic :'(           ##"
+        echo -e ${RED} "############################################${NC}"
+        exit 1
+    fi
+cd ..
                 rm -rf error.log
                 rm -rf out
                 rm -rf zip
                 rm -rf testing.log
-                exit
-        fi
-
+         
