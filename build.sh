@@ -34,76 +34,15 @@ echo -e "$green << setup dirs >> \n $white"
 
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
-
-# Now u can chose which things need to be modified
-# CHATID = chatid of a telegram group/channel
-# API_BOT = api bot of a telegram bot
-#
-# DEVICE = your device codename
-# KERNEL_NAME = the name of ur kranul
-#
-# DEFCONFIG = defconfig that will be used to compile the kernel
-#
-# AnyKernel = the url of your modified anykernel script
-# AnyKernelbranch = the branch of your modified anykernel script
-#
-# HOSST = build host
-# USEER = build user
-#
-# TOOLCHAIN = the toolchain u want to use "gcc/clang"
-
-CHATID="-1001750745917"
-API_BOT="6823000320:AAHpbcybFnfCrE2h1BerQH24Qr2BT_ohSe4"
-
-
 DEVICE="Redmi Note 4/4X"
 CODENAME="mido"
 KERNEL_NAME="FussionKernel"
-
 DEFCONFIG="vendor/mido_defconfig"
-
 AnyKernel="https://github.com/Hunter-commits/anykernel.git"
 AnyKernelbranch="master"
-
 HOSST="areal28's Buildbot"
 USEER="areal28"
-
-TOOLCHAIN="gcc"
-
-# setup telegram env
-export BOT_MSG_URL="https://api.telegram.org/bot$API_BOT/sendMessage"
-export BOT_BUILD_URL="https://api.telegram.org/bot$API_BOT/sendDocument"
-
-tg_post_msg() {
-        curl -s -X POST "$BOT_MSG_URL" -d chat_id="$2" \
-        -d "parse_mode=html" \
-        -d text="$1"
-}
-
-tg_post_build() {
-        #Post MD5Checksum alongwith for easeness
-        MD5CHECK=$(md5sum "$1" | cut -d' ' -f1)
-
-        #Show the Checksum alongwith caption
-        curl --progress-bar -F document=@"$1" "$BOT_BUILD_URL" \
-        -F chat_id="$2" \
-        -F "disable_web_page_preview=true" \
-        -F "parse_mode=html" \
-        -F caption="$3 build finished in $(($Diff / 60)) minutes and $(($Diff % 60)) seconds | <b>MD5 Checksum : </b><code>$MD5CHECK</code>"
-}
-
-tg_error() {
-        curl --progress-bar -F document=@"$1" "$BOT_BUILD_URL" \
-        -F chat_id="$2" \
-        -F "disable_web_page_preview=true" \
-        -F "parse_mode=html" \
-        -F caption="$3Failed to build , check <code>error.log</code>"
-}
-
-# Now let's clone gcc/clang on HOME dir
-# And after that , the script start the compilation of the kernel it self
-# For regen the defconfig . use the regen.sh script
-
+TOOLCHAIN="clang"
 if [ "$TOOLCHAIN" == gcc ]; then
 	if [ ! -d "$HOME/gcc64" ] && [ ! -d "$HOME/gcc32" ]
 	then
