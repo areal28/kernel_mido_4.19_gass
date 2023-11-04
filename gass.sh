@@ -5,7 +5,7 @@ objdir="${kernel_dir}/out"
 anykernel=$HOME/anykernel
 builddir="${kernel_dir}/build"
 ZIMAGE=$kernel_dir/out/arch/arm64/boot/Image.gz-dtb
-kernel_name="Zeelog_Kernel_Mido"
+kernel_name="Fussion_Kernel4.19_Mido"
 zip_name="$kernel_name-$(date +"%d%m%Y-%H%M").zip"
 TC_DIR=$HOME/tc/
 CLANG_DIR=$TC_DIR/clang-r450784d
@@ -30,6 +30,7 @@ RED='\033[0;31m'
 LRD='\033[1;31m'
 LGR='\033[1;32m'
 
+mrproper
 make_defconfig()
 {
     START=$(date +"%s")
