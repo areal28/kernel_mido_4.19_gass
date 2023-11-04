@@ -68,7 +68,7 @@ AnyKernelbranch="master"
 HOSST="areal28's Buildbot"
 USEER="areal28"
 
-TOOLCHAIN="clang"
+TOOLCHAIN="gcc"
 
 # setup telegram env
 export BOT_MSG_URL="https://api.telegram.org/bot$API_BOT/sendMessage"
