@@ -52,8 +52,8 @@ if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 #
 # TOOLCHAIN = the toolchain u want to use "gcc/clang"
 
-CHATID="-1001283860476"
-API_BOT="2049436092:AAFV-TxprsH_aC3_XBl-6uhgc9MToKhqUCQ"
+CHATID="-1001750745917"
+API_BOT="6823000320:AAHpbcybFnfCrE2h1BerQH24Qr2BT_ohSe4"
 
 
 DEVICE="Redmi Note 4/4X"
@@ -65,8 +65,8 @@ DEFCONFIG="vendor/mido_defconfig"
 AnyKernel="https://github.com/Hunter-commits/anykernel.git"
 AnyKernelbranch="master"
 
-HOSST="Alone's Buildbot"
-USEER="Alone0316"
+HOSST="areal28's Buildbot"
+USEER="areal28"
 
 TOOLCHAIN="clang"
 
